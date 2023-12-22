@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('git clone ') {
+    stage('build war file ') {
       agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
@@ -15,6 +15,7 @@ pipeline {
       }
       steps {
         deploy adapters: [tomcat8(credentialsId: 'tomcat_admin', path: '', url: 'http://54.248.34.78:8080/')], contextPath: null, war: '**/*.war'
+        echo "deployed on tomcat server"
       }
     }
   }
