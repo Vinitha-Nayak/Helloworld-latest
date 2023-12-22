@@ -1,7 +1,5 @@
 # pull the tomcat docker image from docker hub
-From tomcat:8-jre8
-
-RUN mvn clean package
+FROM tomcat:8-jre8
 
 COPY Helloworld-latest/target/helloworld-1.4-SNAPSHOT.war /usr/local/tomcat/webapps/
 
