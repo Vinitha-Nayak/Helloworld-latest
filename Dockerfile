@@ -1,24 +1,8 @@
 # pull the tomcat docker image from docker hub
-FROM tomcat:8-jre8
+FROM tomcat:jdk11-openjdk-slim-buster
 
-COPY Helloworld-latest/target/helloworld-1.4-SNAPSHOT.war /usr/local/tomcat/webapps/
+MAINTAINER nayakvinitha413@gmail.com
 
+COPY target/helloworld-1.4-SNAPSHOT.war /usr/local/tomcat/webapps/helloworld.war
 
-
-
-
-
-
-
-
-
-
-#FROM maven:3.8.1-adoptopenjdk-11
-
-#COPY pom.xml .
-#RUN mvn clean package
-
-#COPY ./target/helloworld-1.4-SNAPSHOT.war .
-
-# copying the the helloworld target war package from the target to destincation tomcat Container directory
-#COPY ./target/helloworld-1.4-SNAPSHOT.war /usr/local/tomcat/webapps/
+CMD ["catalina.sh", "run"]
