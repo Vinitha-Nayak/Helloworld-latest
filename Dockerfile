@@ -1,4 +1,9 @@
-FROM tomcat:8.0
-ADD **/*.war /usr/local/tomcat/webapps/
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+FROM maven:alpine as maven
+WORKDIR /app
+COPY ./ ./
+RUN mvn package -DskipTests
+
+FROM maven:alpine
+WORKDIR /app
+COPY --from=maven /app/Helloworld-latest/target/helloworld-1.4-SNAPSHOT.war /app//usr/local/tomcat/webapps/
+ENTRYPOINT ["java", "-jar", "/app/helloworld.war"]  
