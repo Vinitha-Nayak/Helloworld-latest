@@ -3,8 +3,9 @@ FROM tomcat:latest
 
 FROM maven:3.8.1-adoptopenjdk-11
 
+COPY pom.xml .
 RUN mvn clean package
-ADD pom.xml .
+
 
 
 # copying the the helloworld target war package from the target to destincation tomcat Container directory
